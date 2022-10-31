@@ -37,11 +37,11 @@ async def download(url: str, dest_folder: str):
             else:
                 print("Download failed: status code {}\n{}".format(r.status, r.text))
 
-
-def get_release_key(pagedata):
-    key_pattern = re.compile("release_key:\"([A-Za-z0-9]+)\"")
-    release_key = key_pattern.findall(pagedata)[0]
-    return release_key
+#
+# def get_release_key(pagedata):
+#     key_pattern = re.compile("release_key:\"([A-Za-z0-9]+)\"")
+#     release_key = key_pattern.findall(pagedata)[0]
+#     return release_key
 
 
 def is_public_picrew(id):
@@ -55,19 +55,18 @@ async def main():
     id = 41
     virtal_id = id
     key = ""
-    main_thumbnail_url = ""
-    if is_public_picrew(id):
-        main_page = requests.get("https://picrew.me/image_maker/" + str(id)).text
-        key = get_release_key(main_page)
-    else:
-        main_page = requests.get("https://picrew.me/secret_image_maker/" + str(id)).text
-        key = get_release_key(main_page)
-        vid_pattern = re.compile("/app/image_maker/(.*)/icon.*.(png|jpg)")
-        virtual_id = vid_pattern.findall(main_thumbnail_url)[0][0]
-        print(virtual_id)
+    # main_thumbnail_url = ""
+    # if is_public_picrew(id):
+    #     main_page = requests.get("https://picrew.me/image_maker/" + str(id)).text
+    #     key = get_release_key(main_page)
+    # else:
+    #     main_page = requests.get("https://picrew.me/secret_image_maker/" + str(id)).text
+    #     key = get_release_key(main_page)
+    #     vid_pattern = re.compile("/app/image_maker/(.*)/icon.*.(png|jpg)")
+    #     virtual_id = vid_pattern.findall(main_thumbnail_url)[0][0]
+    #     print(virtual_id)
 
-    # ======NO TOCAR======
-    main_page = requests.get("https://picrew.me/image_maker/1272810").text
+    main_page = requests.get("https://picrew.me/image_maker/" + str(id)).text
     nuxt_pattern = re.compile("<script>.+(__NUXT__.*\);)<\/script>")
     nuxt_data = nuxt_pattern.findall(main_page)[0]
     parsed_nuxt_data = js2py.eval_js("function getData(){ " + nuxt_data + "\n return __NUXT__}\n")
