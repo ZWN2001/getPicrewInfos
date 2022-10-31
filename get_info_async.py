@@ -103,15 +103,16 @@ async def main():
                           "] -> [" + item_path + "]")
                     print("-", item['itmId'], base_url + item['thumbUrl'])
 
-                try:
-                    item_dict = img['lst'][str(item['itmId'])]
-                    for k1 in item_dict.keys():
-                        for k2 in item_dict[k1].keys():
+                item_dict = img['lst'][str(item['itmId'])]
+                for k1 in item_dict.keys():
+                    for k2 in item_dict[k1].keys():
+                        try:
                             url = base_url + item_dict[k1][k2]['url']
                             task.append(download(url, dest_folder=item_path))
-                            print("DL: [" + url + "] -> [" + item_path + "]")
-                except:
-                    print("parse error:", str(item['itmId']))
+                            print("DL3: [" + url + "] -> [" + item_path + "]")
+                        except:
+                            print("parse error:", str(item))
+                            continue
 
     except:
         import traceback

@@ -93,17 +93,17 @@ try:
                 # 预览图
                 print("DL2: [" + base_url + item['thumbUrl'] +
                       "] -> [" + item_path + "]")
-                print("-", item['itmId'], base_url + item['thumbUrl'])
-
-            try:
                 item_dict = img['lst'][str(item['itmId'])]
                 for k1 in item_dict.keys():
                     for k2 in item_dict[k1].keys():
-                        url = base_url + item_dict[k1][k2]['url']
-                        download(url, dest_folder=item_path)
-                        print("DL3: [" + url + "] -> [" + item_path + "]")
-            except:
-                print("parse error:", str(item['itmId']))
+                        try:
+                            url = base_url + item_dict[k1][k2]['url']
+                            download(url, dest_folder=item_path)
+                            print("DL3: [" + url + "] -> [" + item_path + "]")
+                        except:
+                            print("parse error:", str(item))
+                            continue
+
 
 except:
     import traceback
