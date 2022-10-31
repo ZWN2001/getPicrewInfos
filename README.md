@@ -20,6 +20,8 @@ https://picrew.me/image_maker/id
 
 `python3 get_info.py`或者像我一样用`pycharm`右键直接run就OK
 
+&nbsp;
+
 ### EN
 
 Reference：https://github.com/Martinz64/picrew-archiver
